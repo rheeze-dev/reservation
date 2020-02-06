@@ -43,7 +43,92 @@
 <div class="w3-container w3-black text-black">
     <h2 class="mb-4"> </h2>
 </div>
+<div>
+    @*<input type="button" id="TypeId" value="Test Type" style="z-index:1031;" />
+    <input type="button" id="DeleteTypeId" value="Test Type" style="z-index:1031;" />*@
+    <input type="text" id="InsertTypeText"/>
+    <input type="button" id="InsertType" value="Add"/>
+        <select id="types"></select>
+        <input type="button" id="DeleteType" value="Delete" />
+        @*<select id="types"></select>
+        <input type="button" id="DeleteType" value="Delete" />*@
+        <input type="text" id="UpdateTypeText" />
+        <input type="button" id="UpdateType" value="Update" />
+    <script>
+        $(function () {
+            $("#InsertType").on("click", function (e) {
+                var addType = $("#InsertTypeText").val();
+                //alert(addType);
+                //alert("working!");
+                $.ajax({
+                    url: "@Html.Raw(Url.Action("InsertType", "Type"))",
+                    Type: "post",
+                    data: {
+                        name : addType
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        loadType();
+                    }
+                });
+            });
+            loadType();
 
+            $("#UpdateType").on("click", function (e) {
+                var getSelectedType = $("#types").val();
+                var editType = $("#UpdateTypeText").val();
+                //alert(getSelectedType);
+                //alert(editType);
+                //alert("working!");
+                $.ajax({
+                    url: "@Html.Raw(Url.Action("EditTypeById", "Type"))",
+                    Type: "post",
+                    data: {
+                        id: getSelectedType,
+                        name : editType
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        loadType();
+                    }
+                });
+            });
+            loadType();
+
+            function loadType() {
+                var optionsSelect = $("#types");
+                optionsSelect.empty();
+                $.ajax({
+                    url: "@Html.Raw(Url.Action("LoadTypes", "Type"))",
+                    Type: "post",
+                    success: function (data) {
+                        var options = data.map(function (val, ind) {
+                            return $("<option></option>").val(val.id).html(val.name);
+                        });
+                        optionsSelect.append(options);
+                    }
+                });
+            }
+            $("#DeleteType").on("click", function (e) {
+                //alert("working!");
+                var removeSelectedType = $("#types").val();
+                //alert(removeSelectedType);
+                $.ajax({
+                    url: "@Html.Raw(Url.Action("DeleteTypeById", "Type"))",
+                    Type: "post",
+                    data: {
+                        Id: removeSelectedType
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        loadType();
+                    }
+                });
+            });
+
+        });
+    </script>
+</div>
 <!-- Portfolio Section -->
 <section id="portfolio">
     @await Html.PartialAsync("~/views/Asin/Portfolio.cshtml")
