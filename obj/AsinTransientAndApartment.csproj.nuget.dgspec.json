@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gybz\\source\\repos\\AsinTransientAndApartment\\AsinTransientAndApartment\\AsinTransientAndApartment.csproj": {}
+    "G:\\dev\\reservation\\AsinTransientAndApartment.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gybz\\source\\repos\\AsinTransientAndApartment\\AsinTransientAndApartment\\AsinTransientAndApartment.csproj": {
+    "G:\\dev\\reservation\\AsinTransientAndApartment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gybz\\source\\repos\\AsinTransientAndApartment\\AsinTransientAndApartment\\AsinTransientAndApartment.csproj",
+        "projectUniqueName": "G:\\dev\\reservation\\AsinTransientAndApartment.csproj",
         "projectName": "AsinTransientAndApartment",
-        "projectPath": "C:\\Users\\Gybz\\source\\repos\\AsinTransientAndApartment\\AsinTransientAndApartment\\AsinTransientAndApartment.csproj",
+        "projectPath": "G:\\dev\\reservation\\AsinTransientAndApartment.csproj",
         "packagesPath": "C:\\Users\\Gybz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gybz\\source\\repos\\AsinTransientAndApartment\\AsinTransientAndApartment\\obj\\",
+        "outputPath": "G:\\dev\\reservation\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

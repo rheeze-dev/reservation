@@ -22,6 +22,7 @@ namespace AsinTransientAndApartment.Models
         public DbSet<Status> statuses { get; set; }
         public DbSet<Type> types { get; set; }
         public DbSet<UserRole> userRoles { get; set; }
+        public DbSet<Reserve> Reserve { get; set; }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    optionsBuilder.UseSqlServer(ConfigurationManager.connectionString["ReservationDB"].ConnectionString);

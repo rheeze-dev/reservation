@@ -27,17 +27,17 @@ namespace AsinTransientAndApartment.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Comment");
+                    //b.Property<string>("Comment");
 
-                    b.Property<int>("ContactNumber");
+                    b.Property<string>("ContactNumber");
 
-                    b.Property<string>("EmailAddress");
+                    b.Property<int>("NumberOfGuest");
 
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
 
-                    b.Property<int>("Status");
+                    b.Property<int>("NumberOfNight");
 
                     b.HasKey("Id");
 

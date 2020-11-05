@@ -120,10 +120,15 @@
                 $('#new-event').val('')
             })
 
-            $("#calendar").on("click", ".fc-day", function () {
-                //alert("click");
+            $("#calendar").on("click", ".fc-past", function () {
+                //alert("Error!");
                 var date = $(this).attr("data-date");
                 //alert(date);
+                Swal.fire({
+                    type: 'error',
+                    title: 'Error!',
+                    text: 'This date is not available.',
+                })
             })
         })</script>
 
@@ -131,7 +136,137 @@
         //btnUpdate
         $(function () {
 
-            $(".fc-view-container").on("click", function () {
+            $("#calendar").on("click", ".fc-today", function () {
+                var userId = $(this).attr("data-id");
+                 var addGuestFirstName = $("#AddGuestFirstNameText").val();
+                var addGuestLastName = $("#AddGuestLastNameText").val();
+                var addGuestContactNumber = $("#AddGuestContactNumberText").val();
+                var addGuestNumberOfGuest = $("#AddGuestNumberOfGuestText").val();
+                var addGuestNumberOfNight = $("#AddGuestNumberOfNightText").val();
+                var htmlContent = `<div class="container">
+<div class="row">
+<div class="col-md-6">
+<input type="tect" id="AddGuestFirstNameText" placeholder="First Name"/>
+<div>
+<div class="col-md-6">
+<input type="tect" id="AddGuestLastNameText" placeholder="Last Name"/>
+<div>
+<div class="col-md-6">
+<input type="tect" id="AddGuestContactNumberText" placeholder="Contact Number"/>
+<div>
+<div class="col-md-6">
+<input type="tect" id="AddGuestNumberOfGuestText" placeholder="Number Of Guest"/>
+<div>
+<div class="col-md-6">
+<input type="tect" id="AddGuestNumberOfNightText" placeholder="Number Of Night"/>
+<div>
+</div>`
+                Swal.fire({
+                    title: 'Guest',
+                    html: htmlContent,
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonText: 'Submit',
+                    cancelButtonText: 'Cancel',
+                }).then((result) => {
+                    if (result.value) {
+                        addGuestFirstName = $("body").find("#AddGuestFirstNameText").val();
+                        addGuestLastName = $("body").find("#AddGuestLastNameText").val();
+                        addGuestContactNumber = $("body").find("#AddGuestContactNumberText").val();
+                        addGuestNumberOfGuest = $("body").find("#AddGuestNumberOfGuestText").val();
+                        addGuestNumberOfNight = $("body").find("#AddGuestNumberOfNightText").val();
+                        addGuest(addGuestFirstName, addGuestLastName, addGuestContactNumber, addGuestNumberOfGuest, addGuestNumberOfNight);
+                    } else if (
+                        result.dismiss === Swal.dismissReason.cancel
+                    ) {
+                        Swal.fire(
+                            'Cancelled',
+                            '',
+                            'error'
+                        )
+                    }
+                })
+            });
+
+            $("#calendar").on("click", ".fc-future", function () {
+                var userId = $(this).attr("data-id");
+                 var addGuestFirstName = $("#AddGuestFirstNameText").val();
+                var addGuestLastName = $("#AddGuestLastNameText").val();
+                var addGuestContactNumber = $("#AddGuestContactNumberText").val();
+                var addGuestNumberOfGuest = $("#AddGuestNumberOfGuestText").val();
+                var addGuestNumberOfNight = $("#AddGuestNumberOfNightText").val();
+                var htmlContent = `<div class="container">
+<div class="row">
+<div class="col-md-6">
+<input type="tect" id="AddGuestFirstNameText" placeholder="First Name"/>
+<div>
+<div class="col-md-6">
+<input type="tect" id="AddGuestLastNameText" placeholder="Last Name"/>
+<div>
+<div class="col-md-6">
+<input type="tect" id="AddGuestContactNumberText" placeholder="Contact Number"/>
+<div>
+<div class="col-md-6">
+<input type="tect" id="AddGuestNumberOfGuestText" placeholder="Number Of Guest"/>
+<div>
+<div class="col-md-6">
+<input type="tect" id="AddGuestNumberOfNightText" placeholder="Number Of Night"/>
+<div>
+</div>`
+                Swal.fire({
+                    title: 'Guest',
+                    html: htmlContent,
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonText: 'Submit',
+                    cancelButtonText: 'Cancel',
+                }).then((result) => {
+                    if (result.value) {
+                        addGuestFirstName = $("body").find("#AddGuestFirstNameText").val();
+                        addGuestLastName = $("body").find("#AddGuestLastNameText").val();
+                        addGuestContactNumber = $("body").find("#AddGuestContactNumberText").val();
+                        addGuestNumberOfGuest = $("body").find("#AddGuestNumberOfGuestText").val();
+                        addGuestNumberOfNight = $("body").find("#AddGuestNumberOfNightText").val();
+                        addGuest(addGuestFirstName, addGuestLastName, addGuestContactNumber, addGuestNumberOfGuest, addGuestNumberOfNight);
+                    } else if (
+                        result.dismiss === Swal.dismissReason.cancel
+                    ) {
+                        Swal.fire(
+                            'Cancelled',
+                            '',
+                            'error'
+                        )
+                    }
+                })
+            });
+
+            function addGuest(addGuestFirstName, addGuestLastName, addGuestContactNumber, addGuestNumberOfGuest, addGuestNumberOfNight) {
+                $.ajax({
+                    url: "@Html.Raw(Url.Action("AddGuest", "Guest"))",
+                    Type: "post",
+                    data: {
+                        firstName: addGuestFirstName,
+                        lastName: addGuestLastName,
+                        contactNumber: addGuestContactNumber,
+                        numberOfGuest: addGuestNumberOfGuest,
+                        numberOfNight: addGuestNumberOfNight
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        Swal.fire(
+                            'Submitted',
+                            'Your file has been submitted.',
+                            'success'
+                        );
+                    }
+                });
+            }
+        });
+    </script>
+
+            @*$("#calendar").on("click", ".fc-future", function () {
                 var userId = $(this).attr("data-id");
                 Swal.mixin({
                     input: 'text',
@@ -184,7 +319,24 @@
             });
             function saveReservation($data) {
                 //ajax here
-                alert($data);
+              //alert($data);
+                $.ajax({
+                    url: "@Html.Raw(Url.Action("AddGuest", "Guest"))",
+                    Type: "post",
+                    data: {
+                        //firstName: $data,
+                        //lastName: $data,
+                        contactNumber: $data
+                    },
+                    success: function (data) {
+                        console, log(data);
+                        Swal.fire(
+                            'Submitted',
+                            'Your file has been submitted.',
+                            'success'
+                        );
+                    }
+                });
             }
         });
-</script>
+</script>*@

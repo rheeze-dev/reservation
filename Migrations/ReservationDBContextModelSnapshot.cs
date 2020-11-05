@@ -15,7 +15,7 @@ namespace AsinTransientAndApartment.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
+                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -25,17 +25,15 @@ namespace AsinTransientAndApartment.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Comment");
-
-                    b.Property<int>("ContactNumber");
-
-                    b.Property<string>("EmailAddress");
+                    b.Property<string>("ContactNumber");
 
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
 
-                    b.Property<int>("Status");
+                    b.Property<int>("NumberOfGuest");
+
+                    b.Property<int>("NumberOfNight");
 
                     b.HasKey("Id");
 
@@ -71,6 +69,27 @@ namespace AsinTransientAndApartment.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("reservations");
+                });
+
+            modelBuilder.Entity("AsinTransientAndApartment.Models.Reserve", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ContactNumber");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<int>("NumberOfGuest");
+
+                    b.Property<int>("NumberOfNight");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reserve");
                 });
 
             modelBuilder.Entity("AsinTransientAndApartment.Models.Room", b =>

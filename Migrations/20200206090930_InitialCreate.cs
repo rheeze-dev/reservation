@@ -14,12 +14,12 @@ namespace AsinTransientAndApartment.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    ContactNumber = table.Column<int>(nullable: false),
-                    EmailAddress = table.Column<string>(nullable: true),
-                    Status = table.Column<int>(nullable: false),
-                    Comment = table.Column<string>(nullable: true)
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    ContactNumber = table.Column<string>(nullable: false),
+                    NumberOfGuest = table.Column<string>(nullable: false),
+                    NumberOfNight = table.Column<int>(nullable: false)
+                    //Comment = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

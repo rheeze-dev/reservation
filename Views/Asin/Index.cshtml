@@ -34,26 +34,31 @@
     @await Html.PartialAsync("~/views/Asin/AboutUs.cshtml")
 </section>
 
-<div class="w3-container w3-black text-black">
+@*<div class="w3-container w3-black text-black">
     <h2 class="mb-4"> </h2>
 </div>
 <div class="w3-container w3-black text-black">
     <h2 class="mb-4"> </h2>
-</div>
-<div class="w3-container w3-black text-black">
+</div>*@
+@*<div class="w3-container w3-black text-black">
     <h2 class="mb-4"> </h2>
-</div>
+</div>*@
 <div>
     @*<input type="button" id="TypeId" value="Test Type" style="z-index:1031;" />
-    <input type="button" id="DeleteTypeId" value="Test Type" style="z-index:1031;" />*@
-    <input type="text" id="InsertTypeText"/>
-    <input type="button" id="InsertType" value="Add"/>
-        <select id="types"></select>
+        <input type="button" id="DeleteTypeId" value="Test Type" style="z-index:1031;" />*@
+    @*<input type="text" id="InsertTypeText" />
+    <input type="button" id="InsertType" value="Add" />
+    <select id="types"></select>
+    <input type="button" id="DeleteType" value="Delete" />
+    <select id="types"></select>
         <input type="button" id="DeleteType" value="Delete" />
-        @*<select id="types"></select>
-        <input type="button" id="DeleteType" value="Delete" />*@
-        <input type="text" id="UpdateTypeText" />
-        <input type="button" id="UpdateType" value="Update" />
+    <input type="text" id="UpdateTypeText" />
+    <input type="button" id="UpdateType" value="Update" />
+    <br />
+    <br />
+    <input type="text" id="AddGuestText" />
+    <input type="button" id="AddGuest" value="Add" />
+
     <script>
         $(function () {
             $("#InsertType").on("click", function (e) {
@@ -73,6 +78,7 @@
                 });
             });
             loadType();
+
 
             $("#UpdateType").on("click", function (e) {
                 var getSelectedType = $("#types").val();
@@ -128,6 +134,153 @@
 
         });
     </script>
+
+    <div>
+        <input type="button" id="AddGuests" value="Informations" />
+    </div>
+
+    <script>
+        $(function () {
+            $("#AddGuests").on("click", function (e) {
+                //alert("working");
+
+                var addGuestFirstName = $("#AddGuestFirstNameText").val();
+                var addGuestLastName = $("#AddGuestLastNameText").val();
+                var addGuestContactNumber = $("#AddGuestContactNumberText").val();
+                var htmlContent = `<div class="container">
+<div class="row">
+<div class="col-md-6">
+<input type="tect" id="AddGuestFirstNameText" placeholder="First Name"/>
+<div>
+<div class="col-md-6">
+<input type="tect" id="AddGuestLastNameText" placeholder="Last Name"/>
+<div>
+<div class="col-md-6">
+<input type="tect" id="AddGuestContactNumberText" placeholder="Contact Number"/>
+<div>
+</div>`
+                Swal.fire({
+                    title: 'Guest',
+                    html: htmlContent,
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonText: 'Submit',
+                    cancelButtonText: 'Cancel',
+                }).then((result) => {
+                    if (result.value) {
+                        addGuestFirstName = $("body").find("#AddGuestFirstNameText").val();
+                        addGuestLastName = $("body").find("#AddGuestLastNameText").val();
+                        addGuestContactNumber = $("body").find("#AddGuestContactNumberText").val();
+                        addGuest(addGuestFirstName, addGuestLastName, addGuestContactNumber);
+                    } else if (
+                        result.dismiss === Swal.dismissReason.cancel
+                    ) {
+                        Swal.fire(
+                            'Cancelled',
+                            '',
+                            'error'
+                        )
+                    }
+                })
+            });
+
+            function addGuest(addGuestFirstName, addGuestLastName, addGuestContactNumber) {
+                $.ajax({
+                    url: "@Html.Raw(Url.Action("AddGuest", "Guest"))",
+                    Type: "post",
+                    data: {
+                        firstName: addGuestFirstName,
+                        lastName: addGuestLastName,
+                        contactNumber: addGuestContactNumber
+                    },
+                    success: function (data) {
+                        console, log(data);
+                        Swal.fire(
+                            'Submitted',
+                            'Your file has been submitted.',
+                            'success'
+                        );
+                    }
+                });
+            }
+        });
+    </script>
+
+    <div>
+        <input type="button" id="AddGuests2" value="Additional Informations" />
+    </div>
+
+    <script>
+        $(function () {
+            $("#AddGuests2").on("click", function (e) {
+                //alert("working");
+
+                var addGuestEmail = $("#AddGuestEmailText").val();
+                var addGuestStatus = $("#AddGuestStatusText").val();
+                var addGuestComment = $("#AddGuestCommentText").val();
+                var htmlContent = `<div class="container">
+<div class="row">
+<div class="col-md-6">
+<input type="tect" id="AddGuestEmailText" placeholder="Email"/>
+<div>
+<div class="col-md-6">
+<input type="tect" id="AddGuestStatusText" placeholder="Status"/>
+<div>
+<div class="col-md-6">
+<input type="tect" id="AddGuestCommentText" placeholder="Comment"/>
+<div>
+</div>`
+                Swal.fire({
+                    title: 'Guest',
+                    html: htmlContent,
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonText: 'Submit',
+                    cancelButtonText: 'Cancel',
+                }).then((result) => {
+                    if (result.value) {
+                        addGuestEmail = $("body").find("#AddGuestEmailText").val();
+                        addGuestStatus = $("body").find("#AddGuestStatusText").val();
+                        addGuestComment = $("body").find("#AddGuestCommentText").val();
+                        addGuest(addGuestEmail, addGuestStatus, addGuestComment);
+                    } else if (
+                        result.dismiss === Swal.dismissReason.cancel
+                    ) {
+                        Swal.fire(
+                            'Cancelled',
+                            '',
+                            'error'
+                        )
+                    }
+                })
+            });
+
+            function addGuest(addGuestEmail, addGuestStatus, addGuestComment) {
+                $.ajax({
+                    url: "@Html.Raw(Url.Action("AddGuest", "Guest"))",
+                    Type: "post",
+                    data: {
+                        email: addGuestEmail,
+                        status: addGuestStatus,
+                        comment: addGuestComment
+                    },
+                    success: function (data) {
+                        console, log(data);
+                        Swal.fire(
+                            'Submitted',
+                            'Your file has been submitted.',
+                            'success'
+                        );
+                    }
+                });
+            }
+        });
+    </script>*@
+
+   
+
 </div>
 <!-- Portfolio Section -->
 <section id="portfolio">
@@ -137,34 +290,34 @@
 <div class="w3-container w3-black text-black">
     <h2 class="mb-4"> </h2>
 </div>
-<div class="w3-container w3-black text-black">
+@*<div class="w3-container w3-black text-black">
     <h2 class="mb-4"> </h2>
-</div>
-<div class="w3-container w3-black text-black">
+</div>*@
+@*<div class="w3-container w3-black text-black">
     <h2 class="mb-4"> </h2>
-</div>
+</div>*@
 
 <!-- Reservation Section -->
 <section class="page-section" id="services">
     @await Html.PartialAsync("~/views/Asin/Reservation.cshtml")
 </section>
 
-<div class="w3-container w3-black text-black">
+@*<div class="w3-container w3-black text-black">
     <h2 class="mb-4"> </h2>
-</div>
-<div class="w3-container w3-black text-black">
+</div>*@
+@*<div class="w3-container w3-black text-black">
     <h2 class="mb-4"> </h2>
-</div>
-<div class="w3-container w3-black text-black">
+</div>*@
+@*<div class="w3-container w3-black text-black">
     <h2 class="mb-4"> </h2>
-</div>
+</div>*@
 
 <!-- Contact Section -->
 <section class="page-section bg-primary" id="contact">
     @await Html.PartialAsync("~/views/Asin/Contact.cshtml")
 </section>
 
-<section class="page-Testimonial">
+@*<section class="page-Testimonial">
     @await Html.PartialAsync("~/views/Asin/Testimonial.cshtml")
-</section>
+</section>*@
 
